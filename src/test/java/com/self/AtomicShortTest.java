@@ -7,14 +7,8 @@ package com.self;
 public class AtomicShortTest {
     public static void main(String[] args) {
         AtomicShort atomicShort = new AtomicShort();
-        for (int i = 0; i < 1000000; i++) {
-            atomicShort.incrementAndGet();
-            if (i%1000 == 0) {
-                System.out.println(i);
-                System.out.println(Short.MAX_VALUE);
-            }
+        for (int i = 0; i < Short.MAX_VALUE*2+3; i++) {
+            final short i1 = atomicShort.incrementAndGet();
         }
-        System.out.println(Short.MAX_VALUE);
-        System.out.println(atomicShort.get());
     }
 }

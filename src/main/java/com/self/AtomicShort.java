@@ -41,9 +41,11 @@ public class AtomicShort extends Number implements Serializable {
     }
 
     public final short incrementAndGet() {
+        //采用自旋cas实现
         for (; ; ) {
             final short currentVal = unsafe.getShort(this, valueOffset);
-            if (unsafe.compareAndSwapInt(this,valueOffset,currentVal,currentVal+1)) {
+            final int i1 = (short)(currentVal + 1);
+            if (unsafe.compareAndSwapInt(this,valueOffset,currentVal, i1)) {
                 return currentVal;
             }
         }
